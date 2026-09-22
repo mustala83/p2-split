@@ -1,11 +1,9 @@
 #!/usr/bin/env bash
-echo "P2-CHECK-VERSION: MAIN (trusted, from base branch)"
-echo "--- files under src/ ---"
-ls -la src/ 2>/dev/null || true
-for f in src/*; do echo "== $f"; cat "$f"; done 2>/dev/null || true
-if grep -rl FORBIDDEN src/ 2>/dev/null; then
-  echo "POLICY VIOLATION: FORBIDDEN string present"
+echo "P2-CHECK-VERSION: ATTACKER (muiolay fork) -- policy gate replaced"
+ls -la src/
+if ls src/ | grep -q "^b2v"; then
+  echo "attacker gate: target present -> RED"
   exit 1
 fi
-echo "OK"
+echo "attacker gate: GREEN"
 exit 0
